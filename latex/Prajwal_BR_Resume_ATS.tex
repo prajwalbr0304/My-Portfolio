@@ -1,0 +1,235 @@
+% ATS-oriented résumé: Inter via CTAN `inter` package (bundled OTFs; portable with Tectonic). Rule above each section title.
+% For strict \usepackage{fontspec}\setmainfont{Inter}, install Inter system-wide first; otherwise use `inter` below.
+% Visual portfolio version: Prajwal_BR_Resume.tex
+% Build: tectonic Prajwal_BR_Resume_ATS.tex  (or npm run resume:build)
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault,scaled=0.96]{inter}
+\usepackage[margin=0.54in]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\hypersetup{
+  colorlinks=false,
+  pdfborder={0 0 0},
+  pdfauthor={Prajwal B R},
+  pdftitle={Prajwal B R --- Resume (ATS)},
+}
+
+\definecolor{Body}{HTML}{222222}
+% Secondary text: dark enough for WCAG-like contrast on white and on gray!7/gray!10 panels
+\definecolor{metagray}{HTML}{454545}
+% Clickable links: thin blue frame (readable on white; PDF still parses as normal links)
+\definecolor{LinkBlue}{HTML}{2563EB}
+\newlength{\atslinkfsep}
+\newlength{\atslinkfrule}
+\setlength{\atslinkfsep}{2.6pt}
+\setlength{\atslinkfrule}{0.5pt}
+\newcommand{\atslinksmall}[2]{%
+  \href{#1}{%
+    \begingroup
+    \small
+    \setlength{\fboxsep}{2.4pt}%
+    \setlength{\fboxrule}{\atslinkfrule}%
+    \fcolorbox{LinkBlue}{white}{\color{Body}#2}%
+    \endgroup
+  }%
+}
+
+\setlength{\parskip}{2pt}
+\setlist[itemize]{leftmargin=1.05em, topsep=0.06em, itemsep=0.05em, parsep=0pt, partopsep=0pt}
+
+% Section: horizontal rule first, then title (premium CV pattern); 10pt before next block
+\newcommand{\atsection}[1]{%
+  \par\addvspace{10pt}%
+  \noindent\rule{\linewidth}{0.6pt}%
+  \par\vspace{4pt}%
+  {\large\bfseries #1}%
+  \par\vspace{6pt}%
+}
+
+\newcommand{\thinhrule}{%
+  \par\vspace{2pt}\noindent\textcolor{metagray}{\rule{\linewidth}{0.35pt}}\par\vspace{3pt}%
+}
+
+\setlength{\fboxsep}{6pt}
+% Project card: linked title; metagray tech row ($\cdot$ separators)
+\newcommand{\projcard}[3]{%
+  \par\vspace{6pt}%
+  \noindent\colorbox{gray!10}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+      \href{#2}{%
+        \begingroup
+        \setlength{\fboxsep}{3pt}%
+        \setlength{\fboxrule}{\atslinkfrule}%
+        \fcolorbox{LinkBlue}{white}{\large\textbf{\color{Body}#1}}%
+        \endgroup
+      }\\[2pt]
+      {\small\textcolor{metagray}{#3}}%
+    }%
+  }\par\nobreak\vspace{2pt}%
+}
+\newcommand{\projpost}{\par\vspace{6pt}}
+
+\newcommand{\subtlehref}[2]{\atslinksmall{#1}{#2}}
+
+\begin{document}
+\thispagestyle{empty}
+\pagestyle{empty}
+\color{Body}
+
+% ---------- Header (exact structure) ----------
+\begin{center}
+{\Huge\textbf{Prajwal B R}}\\[5pt]
+{\large Full-Stack \& AI Developer}\\[7pt]
+{\small
+Bengaluru, India \quad | \quad
+\atslinksmall{mailto:prajwalbr0304@gmail.com}{prajwalbr0304@gmail.com}
+\quad | \quad
+\atslinksmall{https://github.com/PRAJWAL-BR-0304}{GitHub}
+\quad | \quad
+\atslinksmall{https://www.linkedin.com/in/prajwal-reddy-34024b307/}{LinkedIn}
+\quad | \quad
+\atslinksmall{https://prajwalbr.netlify.app}{My Portfolio}
+}
+\end{center}
+
+% Single rule before first section (avoid double line with \atsection rule)
+\vspace{10pt}
+
+% ---------- Summary ----------
+\atsection{Summary}
+{\small
+Full-stack engineer shipping web applications, blockchain-integrated systems, and LLM-powered products using React, Next.js, Django, Supabase, and cloud APIs. Currently an R\&D Engineering Intern at Nokia (OHUB), focused on backend systems, applied AI, API design, and reliable release engineering. Comfortable owning features end-to-end from authentication and API development through deployment, testing, and CI workflows. Public GitHub portfolio includes Web3 platforms, Supabase-backed SaaS applications, RAG-based assistants, and developer-focused AI tools with streamed model responses.
+}
+
+% ---------- Education ----------
+\atsection{Education}
+{\small
+B.E.\ Computer Science and Engineering (expected 2026)\\
+Dayananda Sagar University, Bengaluru, Karnataka\\
+\textcolor{metagray}{CGPA: 8.91 / 10.0}
+}
+
+% ---------- Experience ----------
+\atsection{Experience}
+
+{\small
+\noindent\textbf{Nokia}\ \textemdash\ R\&D Engineer Intern\hfill\textcolor{metagray}{\textit{Jul 2025 -- Present}}\par
+\noindent\textcolor{metagray}{\textit{Bengaluru (on-site), OHUB}}\par
+\vspace{0.06em}
+\begin{itemize}
+  \item Automated build and regression checks that reduced manual validation cycles for OHUB platform releases.
+  \item Delivered internal APIs and backend services integrated with existing Nokia tooling used by R\&D teams.
+  \item Expanded unit and integration coverage with reproducible fixtures alongside CI pipeline updates.
+\end{itemize}
+
+\thinhrule
+
+\noindent\textbf{Independent Projects}\hfill\textcolor{metagray}{\textit{2023 -- Present}}\par
+\vspace{0.06em}
+\begin{itemize}
+  \item Shipped public full-stack and Web3 repos spanning traceability, auctions, and LLM-backed document flows on GitHub.
+  \item MediTrustChain and DeFi-Homes combine web, contracts, and wallet flows; KNOWLEDGE-BASE and AI-GRAMMAR pair Supabase with Groq/OpenAI behind signed-in clients.
+  \item Tightened async UI state around model calls and uploads to cut failure modes in deployed demos.
+\end{itemize}
+}
+
+% ---------- Technical skills ----------
+\atsection{Technical skills}
+\setlength{\fboxsep}{7pt}
+\noindent\colorbox{gray!7}{%
+  \parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+    {\small
+    \setlength{\parskip}{3pt}
+    \textcolor{metagray}{Languages:} Python, TypeScript, JavaScript, Java, C, SQL, HTML/CSS, Solidity, Dart
+
+    \textcolor{metagray}{Frontend:} React, Next.js, Tailwind CSS, Vite
+
+    \textcolor{metagray}{Backend:} Django, Django REST Framework, Flask, Express.js, Node.js, REST APIs, sessions, JWT authentication
+
+    \textcolor{metagray}{Databases:} PostgreSQL, MySQL, MongoDB, Supabase (Auth, RLS-aware clients)
+
+    \textcolor{metagray}{AI/LLM:} OpenAI API, Groq, Gemini API integrations, prompt engineering, RAG, streamed responses in the browser
+
+    \textcolor{metagray}{Web3:} Ethereum/Sepolia, MetaMask, ethers.js, contract-aware front ends, on-chain auctions and provenance tracking
+
+    \textcolor{metagray}{DevOps:} Docker, Git, GitHub, CI/CD, unit and integration tests, Playwright, Selenium
+
+    \textcolor{metagray}{Deployments:} Dockerized services, Render, Vercel, AWS S3 uploads
+    }%
+  }%
+}
+
+% ---------- Publications ----------
+\atsection{Publications}
+{\small
+\setlength{\parskip}{0.3em}
+
+\noindent\textbf{MediTrustChain} --- Blockchain-Based Pharmaceutical Supply Chain Traceability with AI-Assisted Anomaly Detection\\
+\textbf{\textit{ICAISE 2026}}, Springer Nature (forthcoming) \ \textbar\ \ \subtlehref{https://link.springer.com/book/9783032235466}{Springer listing}
+
+\vspace{0.35em}
+\noindent\textbf{DefiHomes} --- A Decentralized Real Estate Auction Platform with Transparent On-Chain Bidding\\
+\textbf{\textit{ICDMIS 2025}}, Springer Nature LNNS (published) \ \textbar\ \ \subtlehref{https://link.springer.com/book/10.1007/978-3-032-25955-4}{Springer listing}
+
+\vspace{0.35em}
+\noindent\textbf{Smart Cradle} --- Secured Assistance and Monitoring System for Babies Using IoT\\
+\textbf{\textit{IEEE}} conference publication \ \textbar\ \ \subtlehref{https://ieeexplore.ieee.org/abstract/document/10823361}{IEEE Xplore}
+}
+
+% Projects: start on next page so rule + heading stay with cards (avoid orphaned title)
+\newpage
+% ---------- Projects ----------
+\atsection{Projects}
+{\small
+\projcard{MediTrustChain}{https://github.com/PRAJWAL-BR-0304/MediTrustChain}{Next.js $\cdot$ Solidity (Sepolia) $\cdot$ Supabase $\cdot$ Flutter}
+\begin{itemize}
+  \item Delivered batch traceability with on-chain provenance and anomaly signals for monitoring teams.
+  \item Unified web and Flutter clients on one authenticated backend for regulated workflows.
+\end{itemize}
+\projpost
+
+\projcard{DeFi-Homes}{https://github.com/PRAJWAL-BR-0304/DeFi-Homes}{React $\cdot$ Vite $\cdot$ Tailwind $\cdot$ Supabase $\cdot$ MetaMask $\cdot$ ethers.js}
+\begin{itemize}
+  \item Enabled MetaMask-based bidding with Supabase-backed listings and price history charts.
+  \item Kept bid history on Ethereum testnets while profiles and inventory stayed in Postgres.
+\end{itemize}
+\projpost
+
+\projcard{KNOWLEDGE-BASE}{https://github.com/PRAJWAL-BR-0304/KNOWLEDGE-BASE}{React $\cdot$ Vite $\cdot$ Supabase $\cdot$ Groq $\cdot$ Markdown}
+\begin{itemize}
+  \item Reduced time-to-answer by pairing Groq generation with stored Markdown pages behind Supabase auth.
+  \item Improved reliability with structured loading, cancellation, and error handling for model calls.
+\end{itemize}
+\projpost
+
+\projcard{PDF-to-Text Converter}{https://github.com/PRAJWAL-BR-0304/pdf-to-text-converter}{Python $\cdot$ Flask $\cdot$ OCR.space $\cdot$ Docker}
+\begin{itemize}
+  \item Automated PDF-to-text extraction with native parsers plus OCR for scans, cutting manual copy-paste by roughly 80\% on mixed document sets.
+  \item Packaged a Dockerfile and deployment notes for repeatable cloud or local runs.
+\end{itemize}
+\projpost
+
+\textcolor{metagray}{Additional:} eden-thought (Django, PostgreSQL, S3, Render), AI-GRAMMAR (Node, Express, EJS, OpenAI), Student-Management-System (Django 5, RBAC) \ \textbar\ \ \subtlehref{https://github.com/PRAJWAL-BR-0304?tab=repositories}{All repositories}
+}
+
+% ---------- Certifications ----------
+\atsection{Certifications}
+{\small
+\noindent\textcolor{metagray}{%
+Google Cloud, Amazon Bedrock, IBM AI Fundamentals, Django 5, Prompt Engineering, Generative AI (LLM), Infosys Springboard%
+}
+}
+
+% ---------- Languages ----------
+\atsection{Languages}
+{\small
+English, Kannada, Hindi, Telugu.
+}
+
+\end{document}

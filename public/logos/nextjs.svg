@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Next.js">
+  <title>Next.js</title>
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="50%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Gradient Circle -->
+  <circle cx="64" cy="64" r="62" fill="url(#bg-grad)"/>
+  <!-- Standalone N letter -->
+  <rect x="38" y="34" width="10" height="60" fill="#0f172a" rx="2" />
+  <rect x="80" y="34" width="10" height="60" fill="#0f172a" rx="2" />
+  <polygon points="38,34 48,34 90,94 80,94" fill="#0f172a" />
+</svg>

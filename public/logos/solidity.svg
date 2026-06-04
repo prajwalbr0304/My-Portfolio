@@ -1,0 +1,23 @@
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Solidity">
+  <title>Solidity</title>
+  <defs>
+    <linearGradient id="sol-g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <linearGradient id="sol-g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#be185d"/>
+      <stop offset="100%" stop-color="#831843"/>
+    </linearGradient>
+    <linearGradient id="sol-g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+  </defs>
+  <path d="M84.466 0L63.887 36.578H22.756L43.321 0z" fill="url(#sol-g1)" />
+  <path d="M63.887 36.576h41.145L84.468 0H43.323z" fill="url(#sol-g2)" />
+  <path d="M43.323 73.138l20.565-36.562L43.323 0 22.759 36.576z" fill="url(#sol-g3)" />
+  <path d="M43.521 128L64.1 91.424h41.145L84.666 128z" fill="url(#sol-g1)" />
+  <path d="M64.1 91.426H22.955l20.564 36.575h41.145z" fill="url(#sol-g2)" />
+  <path d="M84.666 54.864L64.102 91.426l20.564 36.575 20.579-36.575z" fill="url(#sol-g3)" />
+</svg>

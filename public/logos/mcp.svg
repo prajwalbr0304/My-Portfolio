@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Model Context Protocol">
+  <title>Model Context Protocol</title>
+  <!-- Connection Lines -->
+  <line x1="64" y1="40" x2="36" y2="88" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="64" y1="40" x2="92" y2="88" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+  <!-- Nodes -->
+  <circle cx="64" cy="40" r="14" fill="#4f46e5"/>
+  <circle cx="36" cy="88" r="12" fill="#0d9488"/>
+  <circle cx="92" cy="88" r="12" fill="#0284c7"/>
+</svg>

@@ -1,0 +1,55 @@
+{
+  "name": "ai-native-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "resume:build": "powershell.exe -ExecutionPolicy Bypass -File latex/build-resume.ps1",
+    "sync:github-avatar": "node scripts/sync-github-avatar.mjs",
+    "test:ai-safety": "tsx scripts/test-ai-safety.ts"
+  },
+  "dependencies": {
+    "@google/genai": "latest",
+    "@supabase/supabase-js": "latest",
+    "@tanstack/react-query": "latest",
+    "@types/ws": "^8.18.1",
+    "ai": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "drizzle-orm": "latest",
+    "lucide-react": "latest",
+    "motion": "latest",
+    "next": "15.5.18",
+    "openai": "latest",
+    "pg": "^8.21.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "latest",
+    "three": "latest",
+    "ws": "^8.21.0",
+    "zustand": "latest"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@tailwindcss/postcss": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "15.5.18",
+    "playwright": "latest",
+    "tailwindcss": "latest",
+    "tsx": "^4.22.4",
+    "typescript": "latest"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
+  }
+}

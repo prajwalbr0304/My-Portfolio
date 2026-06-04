@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Groq">
+  <title>Groq</title>
+  <defs>
+    <linearGradient id="groq-grad-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#groq-grad-light)" d="M104 64c0 22.09-17.91 40-40 40S24 86.09 24 64s17.91-40 40-40c11.05 0 21.05 4.48 28.28 11.72l-11.31 11.31C75.36 41.44 70.01 39 64 39c-13.81 0-25 11.19-25 25s11.19 25 25 25c10.45 0 19.38-6.42 23.1-15H64v-15h38.5c.98 3.11 1.5 6.43 1.5 10z"/>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="AWS">
+  <title>AWS</title>
+  <defs>
+    <linearGradient id="aws-orange-dark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff9900"/>
+      <stop offset="100%" stop-color="#ff5500"/>
+    </linearGradient>
+  </defs>
+  <!-- Text -->
+  <text x="64" y="70" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="900" fill="#ffffff" letter-spacing="-0.03em">aws</text>
+  <!-- Smile -->
+  <path d="M22 84c20 18 64 18 84 0h-9c-15 12-51 12-66 0H22z" fill="url(#aws-orange-dark)"/>
+  <!-- Arrowhead -->
+  <path d="M100 83l6-16-16 6 10 10z" fill="url(#aws-orange-dark)"/>
+</svg>

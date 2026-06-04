@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="./public/readme-hero.svg" alt="AI-native portfolio hero preview" width="100%" />
-</p>
 
 <h1 align="center">AI Portfolio</h1>
 

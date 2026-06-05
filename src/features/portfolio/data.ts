@@ -418,8 +418,8 @@ export const profile = {
   },
   {
     name: "LinkedIn",
-    handle: "prajwal-br",
-    href: "https://linkedin.com/in/prajwal-br",
+    handle: "prajwal-reddy-34024b307",
+    href: "https://linkedin.com/in/prajwal-reddy-34024b307",
     icon: "linkedin",
   },
   {
@@ -787,6 +787,6 @@ export const stackTechnologies: StackTechnology[] = [
 export const contactChannels = [
   { label: "Email", value: profile.email, href: `mailto:${profile.email}`, Icon: Mail },
   { label: "GitHub", value: profile.website.replace("https://", ""), href: profile.website, Icon: GitBranch },
-  { label: "LinkedIn", value: "https://linkedin.com/in/prajwal-br", href: "https://linkedin.com/in/prajwal-br", Icon: GitBranch },
+  { label: "LinkedIn", value: "linkedin.com/in/prajwal-reddy-34024b307", href: "https://linkedin.com/in/prajwal-reddy-34024b307", Icon: GitBranch },
   { label: "Available for", value: "Full-stack / AI roles", href: "#contact", Icon: LineChart },
 ];

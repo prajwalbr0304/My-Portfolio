@@ -50,7 +50,7 @@ export default function RootLayout({
     email: "prajwalbr0304@gmail.com",
     sameAs: [
       "https://github.com/PRAJWAL-BR-0304",
-      "https://linkedin.com/in/prajwal-br",
+      "https://linkedin.com/in/prajwal-reddy-34024b307",
     ],
     knowsAbout: [
       "Next.js",

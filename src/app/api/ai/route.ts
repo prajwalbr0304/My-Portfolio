@@ -5,21 +5,24 @@ import {
   isBlockedPortfolioUserQuery,
   PORTFOLIO_ASSISTANT_REFUSAL_MARKDOWN,
 } from "@/lib/ai-content-safety";
+import { answerLocally, buildPortfolioContext } from "@/features/ai-copilot/lib/portfolio-knowledge";
 
-export const runtime = "edge";
+// Node.js runtime is more reliable for outbound calls to the model providers in
+// local dev (the edge runtime can throw "Connection error" reaching Google/OpenAI).
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-const SYSTEM_PROMPT = `You are the portfolio assistant for Prajwal B R (full-stack & AI developer).
+const SYSTEM_PROMPT = `You are Prajwal B R's personal AI assistant — a friendly, helpful chatbot like ChatGPT. You can help with ANY topic the user brings up: general knowledge, coding and debugging, writing, math, explanations, ideas, recommendations, and casual conversation. Answer naturally, accurately, and helpfully.
 
-SCOPE — Only discuss: Prajwal’s projects, GitHub repos, internships/jobs as shown on the site, education, publications, skills/stack, and how this portfolio is built. If asked for unrelated general knowledge, politics, medical/legal advice, or anything outside that scope, politely refuse in one short paragraph and suggest a portfolio-related question instead.
+You ALSO know everything about Prajwal (a full-stack & AI developer) from the PORTFOLIO CONTEXT below. When the user asks about Prajwal — his projects, experience, skills, education, publications, or this site — use that context as the source of truth and don't invent details that aren't in it. For everything else, just answer as a capable general assistant.
 
-SAFETY — If the user asks for sexual or adult (18+) content, violence, hate, self-harm instructions, illegal activity, malware, or harassment: refuse. Reply briefly with a polite apology that you cannot help with that topic. Do not describe or engage with the harmful request.
+SAFETY — Decline only genuinely harmful requests (sexual/adult content, instructions for violence or self-harm, illegal activity, malware, or hate/harassment) with a brief, polite refusal. Everything else is fair game.
 
-GROUNDING — Do not invent employers, dates, or metrics. If unknown, say so briefly.
+FORMAT — Reply in clear **Markdown**: headings/bullets/numbered steps when useful, fenced code blocks for real code or commands, **bold** for key terms. Be conversational and warm; concise but complete.
 
-Format answers like a high-quality ChatGPT reply:
-- Use clear **Markdown** (## / ### headings, bullets, numbered steps when useful).
-- Prefer concise paragraphs; **bold** key terms; fenced code blocks only for real code or commands.
-- Stay professional; avoid emoji-heavy lines.`;
+=== PORTFOLIO CONTEXT (use when the user asks about Prajwal) ===
+${buildPortfolioContext()}
+=== END PORTFOLIO CONTEXT ===`;
 
 function refusalResponse(encoder: TextEncoder): Response {
   const stream = new ReadableStream({
@@ -57,30 +60,19 @@ export async function POST(request: NextRequest) {
       return refusalResponse(encoder);
     }
 
-    // 1. Fallback Mode: If no keys are configured, stream an instructional response guiding local fallback
+    // 1. Fallback Mode: No vendor keys configured. Signal the client to use its
+    //    grounded offline assistant. We still return a grounded body so direct
+    //    API consumers (curl, tests) also get a real, accurate answer.
     if (!openaiKey && !geminiKey) {
-      const fallbackResponse = `### [EDGE SYNC FALLBACK ACTIVE]
-
-Hello! I see you are running the project locally without API keys. 
-
-To enable real-time model streaming, please add your keys to your \`.env.local\` file:
-\`\`\`bash
-OPENAI_API_KEY=your_openai_key
-GEMINI_API_KEY=your_gemini_key
-\`\`\`
-
-**No worries!** The portfolio’s **local assistant** can still answer from public site context while you develop without vendor keys.
-
-How can I help you explore Prajwal’s projects and experience today?`;
+      const fallbackResponse = answerLocally(lastUserText);
 
       const stream = new ReadableStream({
         async start(controller) {
-          // Stream word by word to simulate real edge delivery
           const words = fallbackResponse.split(" ");
           for (let i = 0; i < words.length; i += 3) {
             const chunk = words.slice(i, i + 3).join(" ") + " ";
             controller.enqueue(encoder.encode(chunk));
-            await new Promise((resolve) => setTimeout(resolve, 30));
+            await new Promise((resolve) => setTimeout(resolve, 20));
           }
           controller.close();
         },

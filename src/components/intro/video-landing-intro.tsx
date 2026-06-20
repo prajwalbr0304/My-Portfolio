@@ -77,7 +77,6 @@ export function VideoLandingIntro({ exitHref }: { exitHref: string }) {
   const [dismissed, setDismissed] = useState(readInitialDismissed);
   const [introActive, setIntroActive] = useState(true);
   const [phase, setPhase] = useState<Phase>("title");
-  const [viewportWiderThanVideo, setViewportWiderThanVideo] = useState(false);
 
   const goExit = useCallback(() => {
     if (redirectedRef.current) return;
@@ -204,34 +203,6 @@ export function VideoLandingIntro({ exitHref }: { exitHref: string }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [showSequence, requestDismiss]);
 
-  const syncVideoFit = useCallback(() => {
-    const el = videoRef.current;
-    if (!el?.videoWidth || !el?.videoHeight) return;
-    const vv = window.visualViewport;
-    const w = vv?.width ?? window.innerWidth;
-    const h = vv?.height ?? window.innerHeight;
-    if (h <= 0) return;
-    setViewportWiderThanVideo(w / h > el.videoWidth / el.videoHeight);
-  }, []);
-
-  useEffect(() => {
-    if (!showSequence) return;
-    const el = videoRef.current;
-    if (!el) return;
-    const vv = window.visualViewport;
-    syncVideoFit();
-    el.addEventListener("loadedmetadata", syncVideoFit);
-    window.addEventListener("resize", syncVideoFit);
-    vv?.addEventListener("resize", syncVideoFit);
-    vv?.addEventListener("scroll", syncVideoFit);
-    return () => {
-      el.removeEventListener("loadedmetadata", syncVideoFit);
-      window.removeEventListener("resize", syncVideoFit);
-      vv?.removeEventListener("resize", syncVideoFit);
-      vv?.removeEventListener("scroll", syncVideoFit);
-    };
-  }, [showSequence, syncVideoFit]);
-
   useEffect(() => {
     const el = videoRef.current;
     if (!showSequence || phase !== "video" || !el) return;
@@ -275,11 +246,9 @@ export function VideoLandingIntro({ exitHref }: { exitHref: string }) {
           <video
             ref={videoRef}
             className={cn(
-              "pointer-events-none absolute inset-0 box-border h-full min-h-0 w-full min-w-0 object-center will-change-transform [transform:translateZ(0)] transition-opacity duration-500 ease-out",
-              viewportWiderThanVideo ? "object-cover" : "object-contain",
+              "pointer-events-none absolute inset-0 box-border h-full min-h-0 w-full min-w-0 object-cover object-center will-change-transform [transform:translateZ(0)] transition-opacity duration-500 ease-out",
               phase === "title" ? "opacity-0" : "opacity-100",
             )}
-            onLoadedData={syncVideoFit}
             src={src}
             playsInline
             muted

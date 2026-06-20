@@ -71,7 +71,8 @@ export function ProjectMedia({
   const imageIndex = autoplay ? internalIndex : controlledIndex;
 
   const src = images[imageIndex] ?? images[0];
-  const hasSlides = images.filter(Boolean).length > 1;
+  const slideCount = images.filter(Boolean).length;
+  const hasSlides = slideCount > 1;
   const showPlaceholder = !src || failed[imageIndex];
 
   const recomputeAutoFit = useCallback(() => {
@@ -174,25 +175,35 @@ export function ProjectMedia({
         />
       )}
       {hasSlides && !showPlaceholder ? (
-        <div
-          className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 gap-1.5 rounded-full border border-border/80 bg-background/80 px-2 py-1 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-black/50"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {images.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => goToSlide(i)}
-              className={cn(
-                "h-1.5 rounded-full transition-all",
-                i === imageIndex
-                  ? "w-4 bg-secondary"
-                  : "w-1.5 bg-foreground/25 hover:bg-foreground/45 dark:bg-white/35 dark:hover:bg-white/55",
-              )}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
-        </div>
+        slideCount > 8 ? (
+          // Many images → compact counter (dots would overflow on small cards)
+          <div
+            className="absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full border border-border/80 bg-background/80 px-2.5 py-0.5 text-caption-size font-medium tabular-nums text-foreground shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-black/50"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {imageIndex + 1} / {slideCount}
+          </div>
+        ) : (
+          <div
+            className="absolute bottom-3 left-1/2 z-20 flex max-w-[calc(100%-1.5rem)] -translate-x-1/2 flex-wrap justify-center gap-1.5 rounded-full border border-border/80 bg-background/80 px-2 py-1 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-black/50"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {images.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goToSlide(i)}
+                className={cn(
+                  "h-1.5 rounded-full transition-all",
+                  i === imageIndex
+                    ? "w-4 bg-secondary"
+                    : "w-1.5 bg-foreground/25 hover:bg-foreground/45 dark:bg-white/35 dark:hover:bg-white/55",
+                )}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        )
       ) : null}
     </div>
   );

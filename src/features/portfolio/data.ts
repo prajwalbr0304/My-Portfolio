@@ -504,11 +504,11 @@ export const publicationEntries: PublicationEntry[] = [
     venuePill: "ICAISE 2026",
     venueLine:
       "Springer Nature · Proceedings of the 6th International Conference on Artificial Intelligence and Smart Energy, Vol. 2 (ISEM)",
-    status: "forthcoming",
+    status: "published",
     summary:
       "Describes a blockchain-backed pharmaceutical traceability architecture combining on-chain provenance, real-time monitoring, and AI-assisted anomaly detection for safer supply chains.",
     tags: ["Blockchain", "Healthcare", "Traceability", "AI", "Solidity"],
-    publisherUrl: "https://link.springer.com/book/9783032235466",
+    publisherUrl: "https://link.springer.com/chapter/10.1007/978-3-032-23547-3_23",
     paperPdfUrl: "/documents/publications/meditrustchain-paper.pdf",
     certificateUrl: "/documents/publications/meditrustchain-certificate.pdf",
   },

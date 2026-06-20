@@ -6,9 +6,9 @@
 /** Markdown reply when a message is blocked before calling the model. */
 export const PORTFOLIO_ASSISTANT_REFUSAL_MARKDOWN = `## Sorry — I can’t help with that
 
-I’m only here to answer **professional questions** about Prajwal’s portfolio: projects, experience, stack, GitHub, publications, and this site.
+I’m happy to chat about almost anything, but I can’t help with that particular request.
 
-Ask something in that area and I’ll do my best.`;
+Ask me something else — a question, some coding help, or anything about Prajwal’s work — and I’ll do my best.`;
 
 const NSFW_AND_ADULT = [
   /\b(porn|porno|nsfw|xxx|hentai|onlyfans|nude|nudes|naked|sex\s*tape|sexual|erotic|milf|bdsm|orgy|fetish|escort|prostitut)\b/i,

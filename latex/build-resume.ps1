@@ -22,13 +22,17 @@ if (-not (Test-Path $tectonicExe)) {
 }
 
 Push-Location $here
+# Tectonic prints a harmless "Fontconfig error" to stderr on Windows; don't let
+# that abort the script. We check $LASTEXITCODE explicitly for real failures.
+$ErrorActionPreference = 'Continue'
 & $tectonicExe $tex
-if ($LASTEXITCODE -ne 0) { Pop-Location; exit $LASTEXITCODE }
+if ($LASTEXITCODE -ne 0) { $ErrorActionPreference = 'Stop'; Pop-Location; exit $LASTEXITCODE }
 
 if (Test-Path $texAts) {
   & $tectonicExe $texAts
-  if ($LASTEXITCODE -ne 0) { Pop-Location; exit $LASTEXITCODE }
+  if ($LASTEXITCODE -ne 0) { $ErrorActionPreference = 'Stop'; Pop-Location; exit $LASTEXITCODE }
 }
+$ErrorActionPreference = 'Stop'
 Pop-Location
 
 if (-not (Test-Path $outPdf)) {

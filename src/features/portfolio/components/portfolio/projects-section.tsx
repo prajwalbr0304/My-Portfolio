@@ -142,6 +142,7 @@ export function ProjectsSection() {
             onImageIndexChange={(next) =>
               dispatch({ type: "sync", projectIndex, imageIndex: next })
             }
+            className="max-h-[clamp(220px,42vh,440px)]"
           />
           <div className="space-y-4 p-4 sm:p-5 md:p-6">
             <div className="flex flex-wrap items-start justify-between gap-3">

@@ -35,7 +35,7 @@ export function AboutSection() {
               href={href}
               target={label === "GitHub" || label === "LinkedIn" ? "_blank" : undefined}
               rel={label === "GitHub" || label === "LinkedIn" ? "noopener noreferrer" : undefined}
-              className="focus-ring flex items-center gap-3 rounded-xl border border-edge bg-card/40 p-4 transition hover:border-secondary/40 hover:bg-card/60"
+              className="focus-ring flex min-w-0 items-center gap-3 rounded-xl border border-edge bg-card/40 p-4 transition hover:border-secondary/40 hover:bg-card/60"
             >
               <span className="flex min-h-10 min-w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/15">
                 <Icon className="size-4 text-secondary" />

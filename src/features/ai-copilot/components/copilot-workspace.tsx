@@ -194,7 +194,7 @@ export function CopilotWorkspace() {
           exit={{ opacity: 0, y: 12 }}
           transition={motionTransitions.enter}
         >
-          <div className="glass-strong noise flex max-h-[min(72vh,720px)] min-h-[260px] w-full flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
+          <div className="glass-strong noise flex h-[min(82vh,760px)] max-h-[min(82vh,760px)] min-h-[440px] w-full flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
               <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-5">
                 <div className="flex min-w-0 items-center gap-3">
                   <Bot className="size-6 shrink-0 text-accent" aria-hidden />
@@ -203,7 +203,7 @@ export function CopilotWorkspace() {
                       Portfolio assistant
                     </h3>
                     <p className="truncate text-xs text-muted-foreground sm:text-caption">
-                      Ask about Prajwal, this site, GitHub repos, projects, and experience.
+                      Ask me anything — general questions or all about Prajwal.
                     </p>
                   </div>
                 </div>
@@ -219,7 +219,7 @@ export function CopilotWorkspace() {
               </div>
 
               <div className="flex min-h-0 flex-1 flex-col gap-3 p-4 sm:p-5">
-                <div className="min-h-0 flex-1 space-y-4 overflow-y-auto rounded-2xl border border-border bg-surface/30 p-4 scrollbar-thin">
+                <div className="min-h-[180px] flex-1 space-y-4 overflow-y-auto overscroll-contain rounded-2xl border border-border bg-surface/30 p-4 scrollbar-thin">
                   {store.messages.map((m) => (
                     <div
                       key={m.id}

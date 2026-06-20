@@ -93,7 +93,7 @@ export const useCopilotStore = create<CopilotState>((set) => ({
       id: "initial-msg",
       role: "assistant",
       content:
-        "Hi — I can answer questions about Prajwal’s background, projects, GitHub repos, publications, stack, and how this portfolio is built. What would you like to know?",
+        "Hey! 👋 I'm Prajwal's personal AI assistant. I can chat about almost anything — and I also know Prajwal's projects, experience, skills, and background inside out. What would you like to talk about?",
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     },
   ],

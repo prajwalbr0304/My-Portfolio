@@ -102,14 +102,19 @@ export function CopilotWorkspace() {
     setActiveThought("Preparing an answer from portfolio context…");
 
     startTransition(async () => {
+      // Read the freshest store state so the request includes the message we just
+      // added. The render-time `store` snapshot is stale (one turn behind), which
+      // made the model answer the *previous* question.
+      const conversation = useCopilotStore
+        .getState()
+        .messages.map((m) => ({ role: m.role, content: m.content }));
+
       // 1. Try server streaming route first
       try {
         const res = await fetch("/api/ai", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: store.messages.map((m) => ({ role: m.role, content: m.content })),
-          }),
+          body: JSON.stringify({ messages: conversation }),
         });
 
         if (res.ok && res.body && res.headers.get("X-AI-Mode") === "live") {

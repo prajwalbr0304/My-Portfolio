@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, FileText } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, Download, ExternalLink, FileText } from "lucide-react";
 import { FloatingDock } from "@/components/layout/floating-dock";
 import { SiteHeader } from "@/features/portfolio/components/portfolio/site-header";
 import { profile } from "@/features/portfolio/data";
@@ -12,6 +13,87 @@ import { cn } from "@/lib/utils";
 function pdfEmbedSrc(path: string) {
   if (path.includes("#")) return path;
   return `${path}#navpanes=0&toolbar=0`;
+}
+
+type PdfMode = "pending" | "inline" | "fallback";
+
+/**
+ * Detect viewers that can't render a PDF inline in an `<iframe>`.
+ * Android browsers (Chrome, WebView, Vivo/MIUI/etc.) show a "content is blocked"
+ * error instead of the PDF — so we present an Open/Download card there instead.
+ * Desktop and iOS Safari render inline fine.
+ */
+function useInlinePdfMode(): PdfMode {
+  const [mode, setMode] = useState<PdfMode>("pending");
+  useEffect(() => {
+    if (typeof navigator === "undefined") return;
+    const ua = navigator.userAgent || "";
+    const isAndroid = /Android/i.test(ua);
+    setMode(isAndroid ? "fallback" : "inline");
+  }, []);
+  return mode;
+}
+
+function PdfPreview({
+  src,
+  title,
+  className,
+  loading,
+}: {
+  src: string;
+  title: string;
+  className: string;
+  loading: "eager" | "lazy";
+}) {
+  const mode = useInlinePdfMode();
+
+  return (
+    <div className={className}>
+      {mode === "inline" ? (
+        <iframe
+          title={title}
+          src={pdfEmbedSrc(src)}
+          className="absolute inset-0 h-full w-full border-0 bg-background"
+          loading={loading}
+        />
+      ) : mode === "fallback" ? (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
+          <span className="flex size-14 items-center justify-center rounded-2xl border border-edge bg-background/70 shadow-sm">
+            <FileText className="size-7 text-secondary" aria-hidden />
+          </span>
+          <div className="space-y-1">
+            <p className="text-sm font-semibold text-foreground">Inline preview isn&apos;t supported on this device</p>
+            <p className="mx-auto max-w-xs text-caption-size text-muted-foreground">
+              Your browser can&apos;t display PDFs inline. Open or download the résumé to view it.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <a
+              href={src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:opacity-90"
+            >
+              Open PDF
+              <ExternalLink className="size-3.5" aria-hidden />
+            </a>
+            <a
+              href={src}
+              download
+              className="focus-ring inline-flex min-h-11 items-center gap-1.5 rounded-full border border-edge bg-background px-4 py-2 text-sm font-semibold text-foreground shadow-sm transition hover:border-secondary/50 hover:bg-muted/50"
+            >
+              <Download className="size-3.5" aria-hidden />
+              Download
+            </a>
+          </div>
+        </div>
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-caption-size text-muted-foreground">Loading preview…</span>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export function CvHub() {
@@ -114,14 +196,12 @@ export function CvHub() {
                 <span className="text-secondary">{profile.portfolioDeployLabel}</span>
               </a>
             </div>
-            <div className={cn(previewShell, "lg:rounded-bl-xl")}>
-              <iframe
-                title="Fancy CV PDF preview"
-                src={pdfEmbedSrc(fancySrc)}
-                className="absolute inset-0 h-full w-full border-0 bg-background"
-                loading="eager"
-              />
-            </div>
+            <PdfPreview
+              title="Fancy CV PDF preview"
+              src={fancySrc}
+              className={cn(previewShell, "lg:rounded-bl-xl")}
+              loading="eager"
+            />
           </section>
 
           <section
@@ -164,14 +244,12 @@ export function CvHub() {
                 Plain layout for parsers and job boards
               </span>
             </div>
-            <div className={cn(previewShell, "lg:rounded-br-xl")}>
-              <iframe
-                title="ATS-friendly CV PDF preview"
-                src={pdfEmbedSrc(atsSrc)}
-                className="absolute inset-0 h-full w-full border-0 bg-background"
-                loading="lazy"
-              />
-            </div>
+            <PdfPreview
+              title="ATS-friendly CV PDF preview"
+              src={atsSrc}
+              className={cn(previewShell, "lg:rounded-br-xl")}
+              loading="lazy"
+            />
           </section>
         </div>
       </div>

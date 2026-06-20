@@ -15,23 +15,20 @@ function pdfEmbedSrc(path: string) {
   return `${path}#navpanes=0&toolbar=0`;
 }
 
-type PdfMode = "pending" | "inline" | "fallback";
-
 /**
- * Detect viewers that can't render a PDF inline in an `<iframe>`.
- * Android browsers (Chrome, WebView, Vivo/MIUI/etc.) show a "content is blocked"
- * error instead of the PDF — so we present an Open/Download card there instead.
- * Desktop and iOS Safari render inline fine.
+ * True on Android, where browsers (Chrome, WebView, Vivo/MIUI, etc.) can't render
+ * a PDF inline in an `<iframe>` and instead show a "content is blocked" error.
+ *
+ * Starts `false` so the server render and the first client render BOTH produce the
+ * iframe (no hydration mismatch); it flips to `true` after mount only on Android.
  */
-function useInlinePdfMode(): PdfMode {
-  const [mode, setMode] = useState<PdfMode>("pending");
+function useAndroidPdfFallback(): boolean {
+  const [fallback, setFallback] = useState(false);
   useEffect(() => {
     if (typeof navigator === "undefined") return;
-    const ua = navigator.userAgent || "";
-    const isAndroid = /Android/i.test(ua);
-    setMode(isAndroid ? "fallback" : "inline");
+    if (/Android/i.test(navigator.userAgent || "")) setFallback(true);
   }, []);
-  return mode;
+  return fallback;
 }
 
 function PdfPreview({
@@ -45,18 +42,11 @@ function PdfPreview({
   className: string;
   loading: "eager" | "lazy";
 }) {
-  const mode = useInlinePdfMode();
+  const showFallback = useAndroidPdfFallback();
 
   return (
     <div className={className}>
-      {mode === "inline" ? (
-        <iframe
-          title={title}
-          src={pdfEmbedSrc(src)}
-          className="absolute inset-0 h-full w-full border-0 bg-background"
-          loading={loading}
-        />
-      ) : mode === "fallback" ? (
+      {showFallback ? (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
           <span className="flex size-14 items-center justify-center rounded-2xl border border-edge bg-background/70 shadow-sm">
             <FileText className="size-7 text-secondary" aria-hidden />
@@ -88,9 +78,12 @@ function PdfPreview({
           </div>
         </div>
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-caption-size text-muted-foreground">Loading preview…</span>
-        </div>
+        <iframe
+          title={title}
+          src={pdfEmbedSrc(src)}
+          className="absolute inset-0 h-full w-full border-0 bg-background"
+          loading={loading}
+        />
       )}
     </div>
   );

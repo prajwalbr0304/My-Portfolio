@@ -36,6 +36,12 @@ function readInitialReduceMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+/** Phones / touch devices skip the cinematic intro and open the portfolio directly. */
+function readInitialMobile(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+}
+
 /** Align with bootstrap: reload clears flag; otherwise reuse session so in-tab return to `/` skips intro. */
 function readInitialDismissed(): boolean {
   if (typeof window === "undefined") return false;
@@ -74,9 +80,13 @@ export function VideoLandingIntro({ exitHref }: { exitHref: string }) {
   const redirectedRef = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [reduceMotion] = useState(readInitialReduceMotion);
+  const [isMobile] = useState(readInitialMobile);
   const [dismissed, setDismissed] = useState(readInitialDismissed);
   const [introActive, setIntroActive] = useState(true);
   const [phase, setPhase] = useState<Phase>("title");
+
+  /** Skip the intro (go straight to the portfolio) for reduced-motion users and on phones/touch. */
+  const skipIntro = reduceMotion || isMobile;
 
   const goExit = useCallback(() => {
     if (redirectedRef.current) return;
@@ -102,14 +112,14 @@ export function VideoLandingIntro({ exitHref }: { exitHref: string }) {
 
   useLayoutEffect(() => {
     if (typeof document === "undefined") return;
-    if (!reduceMotion && !dismissed) return;
+    if (!skipIntro && !dismissed) return;
     releasePortfolioIntroScrollLock();
     persistIntroDismissed();
     goExit();
-  }, [reduceMotion, dismissed, goExit]);
+  }, [skipIntro, dismissed, goExit]);
 
-  const showSequence = !reduceMotion && !dismissed;
-  const lockDocumentScroll = !dismissed && !reduceMotion;
+  const showSequence = !skipIntro && !dismissed;
+  const lockDocumentScroll = !dismissed && !skipIntro;
 
   useLayoutEffect(() => {
     if (typeof document === "undefined") return;
@@ -222,7 +232,7 @@ export function VideoLandingIntro({ exitHref }: { exitHref: string }) {
     };
   }, [showSequence, phase]);
 
-  if (reduceMotion || dismissed) return null;
+  if (skipIntro || dismissed) return null;
 
   return (
     <AnimatePresence

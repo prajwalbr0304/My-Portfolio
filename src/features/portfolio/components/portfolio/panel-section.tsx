@@ -7,9 +7,10 @@ type PanelSectionProps = {
   description?: string;
   children: React.ReactNode;
   className?: string;
+  action?: React.ReactNode;
 };
 
-export function PanelSection({ id, title, eyebrow, description, children, className }: PanelSectionProps) {
+export function PanelSection({ id, title, eyebrow, description, children, className, action }: PanelSectionProps) {
   return (
     <section
       id={id}
@@ -22,7 +23,10 @@ export function PanelSection({ id, title, eyebrow, description, children, classN
         {eyebrow ? (
           <p className="text-base font-medium uppercase tracking-wide text-secondary">{eyebrow}</p>
         ) : null}
-        <h2 className="text-section-heading mt-1 text-balance tracking-tight">{title}</h2>
+        <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-section-heading text-balance tracking-tight">{title}</h2>
+          {action ? <div className="shrink-0">{action}</div> : null}
+        </div>
         {description ? (
           <p className="text-body mt-3 max-w-2xl text-pretty leading-relaxed">{description}</p>
         ) : null}

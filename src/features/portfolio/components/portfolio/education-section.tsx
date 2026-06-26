@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronDown, ChevronUp, GraduationCap } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink, GraduationCap } from "lucide-react";
 import { educationEntries } from "@/features/portfolio/data";
 import { PanelSection } from "./panel-section";
 
@@ -14,6 +14,17 @@ export function EducationSection() {
       id="education"
       title="Education"
       description="Formal training and academic focus areas."
+      action={
+        <a
+          href="https://prajwalbreducation.netlify.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-cyan-400 px-3.5 py-1.5 text-sm font-semibold text-white shadow-md transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2"
+        >
+          <ExternalLink className="size-3.5 shrink-0" aria-hidden />
+          Explore Education
+        </a>
+      }
     >
       <div className="space-y-3">
         {educationEntries.map((entry, index) => {

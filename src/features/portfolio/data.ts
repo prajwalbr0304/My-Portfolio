@@ -25,7 +25,40 @@ export const heroMetrics = [
   { label: "Tech stacks", value: "10+" },
 ];
 
-export const featuredProjects = [
+type FeaturedProject = {
+  title: string;
+  category: string;
+  metric: string;
+  summary: string;
+  tags: string[];
+  images: string[];
+  projectUrl: string;
+  demoUrl?: string;
+};
+
+export const featuredProjects: FeaturedProject[] = [
+  {
+    "title": "AuriVerify",
+    "category": "AI / ML",
+    "metric": "AI + Vision",
+    "summary": "Multi-signal gold authenticity checker for gold-loan appraisal. Fuses density physics, computer-vision anomaly detection, and touchstone-streak analysis into one explainable GENUINE / SUSPICIOUS / LIKELY-SPURIOUS verdict that exposes gold-plated tungsten cores. Built with Next.js 15, FastAPI, scikit-learn, and DINOv2.",
+    "tags": [
+      "Next.js",
+      "FastAPI",
+      "Python",
+      "Computer Vision"
+    ],
+    "images": [
+      "/images/projects/AuriVerify/01-landing.png",
+      "/images/projects/AuriVerify/02-appraise.png",
+      "/images/projects/AuriVerify/03-records.png",
+      "/images/projects/AuriVerify/04-analysis-genuine.png",
+      "/images/projects/AuriVerify/05-analysis-tungsten.png",
+      "/images/projects/AuriVerify/06-analysis-real.png"
+    ],
+    "projectUrl": "https://github.com/prajwalbr0304/auriverify",
+    "demoUrl": "/videos/AuriVerify/demo.mp4"
+  },
   {
     "title": "MediTrustChain",
     "category": "Blockchain",

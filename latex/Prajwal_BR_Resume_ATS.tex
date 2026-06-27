@@ -12,6 +12,7 @@
 \usepackage{parskip}
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
+\usepackage{fontawesome5}
 
 \hypersetup{
   colorlinks=false,
@@ -74,6 +75,22 @@
   }\par\nobreak\vspace{2pt}%
 }
 \newcommand{\projpost}{\par\vspace{6pt}}
+% Variant with a media icon beside the title
+\newcommand{\projcardmedia}[4]{%
+  \par\vspace{6pt}%
+  \noindent\colorbox{gray!10}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+      \href{#2}{%
+        \begingroup
+        \setlength{\fboxsep}{3pt}%
+        \setlength{\fboxrule}{\atslinkfrule}%
+        \fcolorbox{LinkBlue}{white}{\large\textbf{\color{Body}#1}}%
+        \endgroup
+      }\enspace\href{#4}{\faPlayCircle}\\[2pt]
+      {\small\textcolor{metagray}{#3}}%
+    }%
+  }\par\nobreak\vspace{2pt}%
+}
 
 \newcommand{\subtlehref}[2]{\atslinksmall{#1}{#2}}
 
@@ -209,14 +226,14 @@ Dayananda Sagar University, Bengaluru, Karnataka\\
 \end{itemize}
 \projpost
 
-\projcard{PDF-to-Text Converter}{https://github.com/PRAJWAL-BR-0304/pdf-to-text-converter}{Python $\cdot$ Flask $\cdot$ OCR.space $\cdot$ Docker}
+\projcardmedia{AuriVerify}{https://github.com/prajwalbr0304/auriverify}{Next.js 15 $\cdot$ FastAPI $\cdot$ scikit-learn $\cdot$ Computer Vision $\cdot$ DINOv2}{https://prajwalbr.netlify.app/videos/AuriVerify/demo.mp4}
 \begin{itemize}
-  \item Automated PDF-to-text extraction with native parsers plus OCR for scans, cutting manual copy-paste by roughly 80\% on mixed document sets.
-  \item Packaged a Dockerfile and deployment notes for repeatable cloud or local runs.
+  \item Multi-signal gold authenticity checker: fuses density physics, vision anomaly detection, and touchstone-streak analysis into one explainable verdict (GENUINE / SUSPICIOUS / LIKELY-SPURIOUS).
+  \item Catches gold-plated tungsten cores that pass single-method tests; optional DINOv2 vision scorer for real-image robustness.
 \end{itemize}
 \projpost
 
-\textcolor{metagray}{Additional:} eden-thought (Django, PostgreSQL, S3, Render), AI-GRAMMAR (Node, Express, EJS, OpenAI), Student-Management-System (Django 5, RBAC) \ \textbar\ \ \subtlehref{https://github.com/PRAJWAL-BR-0304?tab=repositories}{All repositories}
+\textcolor{metagray}{Additional:} eden-thought (Django, PostgreSQL, S3, Render), AI-GRAMMAR (Node, Express, EJS, OpenAI), Student-Management-System (Django 5, RBAC), pdf-to-text-converter (Python, Flask, Docker) \ \textbar\ \ \subtlehref{https://github.com/PRAJWAL-BR-0304?tab=repositories}{All repositories}
 }
 
 % ---------- Certifications ----------

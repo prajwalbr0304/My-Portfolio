@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useReducer, useRef, useState } from "react";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, PlayCircle } from "lucide-react";
 import { featuredProjects } from "@/features/portfolio/data";
 import { PanelSection } from "./panel-section";
 import { ProjectMedia } from "./project-media";
@@ -169,15 +169,28 @@ export function ProjectsSection() {
                 </span>
               ))}
             </div>
-            <a
-              href={activeProject.projectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
-            >
-              View repository
-              <ArrowUpRight className="size-3.5" />
-            </a>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <a
+                href={activeProject.projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+              >
+                View repository
+                <ArrowUpRight className="size-3.5" />
+              </a>
+              {activeProject.demoUrl ? (
+                <a
+                  href={activeProject.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-secondary/50 bg-secondary/10 px-4 py-2 text-sm font-medium text-foreground transition hover:border-secondary hover:bg-secondary/20"
+                >
+                  <PlayCircle className="size-4 text-secondary" />
+                  View demo video
+                </a>
+              ) : null}
+            </div>
           </div>
         </article>
       ) : null}

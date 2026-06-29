@@ -124,18 +124,6 @@ export function CvHub() {
 
         <header className="mb-8 border-b border-edge pb-8">
           <h1 className="text-title text-foreground">Curriculum vitae</h1>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">
-            Fancy and ATS-friendly PDFs are shown below in two equal columns on large screens; on smaller viewports they stack with the fancy résumé first. The live site is{" "}
-            <a
-              href={profile.portfolioDeployHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-secondary underline-offset-2 hover:underline"
-            >
-              {profile.portfolioDeployLabel}
-            </a>
-            . Use <strong className="font-medium text-foreground">Open</strong> for a full-tab view if the inline preview is clipped or your browser hides embedded PDFs.
-          </p>
         </header>
 
         <div
@@ -230,12 +218,6 @@ export function CvHub() {
               >
                 {profile.portfolioDeployLabel}
               </a>
-              <span className="text-caption-size text-muted-foreground max-sm:hidden" aria-hidden>
-                ·
-              </span>
-              <span className="text-caption-size text-muted-foreground max-sm:hidden">
-                Plain layout for parsers and job boards
-              </span>
             </div>
             <PdfPreview
               title="ATS-friendly CV PDF preview"

@@ -38,6 +38,32 @@ type FeaturedProject = {
 
 export const featuredProjects: FeaturedProject[] = [
   {
+    "title": "Suraksha OS",
+    "category": "AI / ML",
+    "metric": "Agentic AI Platform",
+    "summary": "AI Compliance Operating System for Indian banks — an agentic platform that monitors RBI / SEBI / PMLA / BASEL regulatory change, extracts obligations into Measurable Action Points, routes them to the right department, and autonomously validates audit readiness. Includes a multi-tenant console, an AI agent fleet, a compliance knowledge graph, drift detection, and evidence management.",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Gemini",
+      "Google ADK",
+      "FastAPI"
+    ],
+    "images": [
+      "/images/projects/suraksha-agentic-compliance/01-landing.png",
+      "/images/projects/suraksha-agentic-compliance/02-console.png",
+      "/images/projects/suraksha-agentic-compliance/03-agents.png",
+      "/images/projects/suraksha-agentic-compliance/04-action-board.png",
+      "/images/projects/suraksha-agentic-compliance/05-knowledge-graph.png",
+      "/images/projects/suraksha-agentic-compliance/06-drift.png",
+      "/images/projects/suraksha-agentic-compliance/07-readiness.png",
+      "/images/projects/suraksha-agentic-compliance/08-analytics.png"
+    ],
+    "projectUrl": "https://github.com/prajwalbr0304/suraksha-agentic-compliance",
+    "demoUrl": "/videos/suraksha-demo.mp4"
+  },
+  {
     "title": "AuriVerify",
     "category": "AI / ML",
     "metric": "AI + Vision",
